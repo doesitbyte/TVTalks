@@ -4,13 +4,14 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Carousel } from 'flowbite-react'
 import ItemCard from '../components/itemCard'
+import Image from 'next/image'
 
 const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
 export default function Home() {
 
   const [trendingList, setTrendingList] = useState([]);
-  const [trendingType, setTrendingType] = useState("all");
+  const [trendingType, setTrendingType] = useState("movie");
   const [trendingRange, setTrendingRange] = useState("week");
 
   useEffect(() => {
@@ -29,9 +30,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div id='trending'>
+        <div id='trending' className='h-screen'>
           <h1 className='p-10 text-center text-5xl text-white font-extrabold uppercase'>Trending Movies of this week</h1>
-          <div className="block h-56 xl:h-80 2xl:h-96 w-1/2 m-auto">
+          <div className="block h-4/5 xl:h-4/5 2xl:h-3/5 w-1/2 mx-auto">
             <Carousel
               indicators={false}
               leftControl={

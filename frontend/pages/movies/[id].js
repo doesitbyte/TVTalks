@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Head from 'next/head';
+import Image from 'next/image';
 
 const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 
@@ -33,10 +34,9 @@ export default function Movie() {
 
     }, [id, itemId])
 
-    if (!itemId || !id) {
+    if (!itemData.genres) {
         return '';
     } else {
-
         return (
             <>
                 <Head>
@@ -45,25 +45,26 @@ export default function Movie() {
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
-                <img id='backdrop' src={"https://image.tmdb.org/t/p/original" + itemData.backdrop_path} className="fixed top-0 opacity-10 z-0 bg-cover"></img>
-                <div id="header" className='px-12 py-12 h-screen flex'>
-                    <div id="poster" className='basis-1/3'>
-                        <img src={"https://image.tmdb.org/t/p/original" + itemData.poster_path} className="relative h-full pb-12"></img>
+                <div className='relative'>
+                    <div className="fixed top-0 left-0 right-0 h-screen z-0">
+                        <Image src={"https://image.tmdb.org/t/p/original" + itemData.backdrop_path} fill className="relative object-cover opacity-10 -z-0" alt={itemData.title} />
                     </div>
-                    <div className='basis-2/3 headerText'>
-                        <h1 className='text-5xl font-extrabold text-white'>{itemData.title}</h1>
-                        <div id="genres" className='flex text-white my-2'>
-                            {itemData.genres.map((genre) => {
-                                return (
-                                    <p key={genre.id} className='text-xs px-1 py-0.5 m-1 border-2 border-solid border-white rounded-md uppercase'>{genre.name}</p>
-                                )
-                            })}
+                    <div id="header" className='px-12 py-12 h-fit flex'>
+                        <div id="poster" className='basis-1/3 relative h-full w-full max-h-5/6 aspect-[2/3]'>
+                            <Image src={"https://image.tmdb.org/t/p/original" + itemData.poster_path} alt={itemData.title} fill object-fit="contain" className="relative pb-12 px-4" />
                         </div>
-                        <p className='my-6 text-white'>{itemData.overview}</p>
+                        <div className='basis-2/3 headerText z-10'>
+                            <h1 className='text-5xl font-extrabold text-white'>{itemData.title}</h1>
+                            <div id="genres" className='flex text-white my-2'>
+                                {itemData.genres.map((genre) => {
+                                    return (
+                                        <p key={genre.id} className='text-xs px-1.5 py-0.5 m-1 border-2 border-solid border-white rounded-md uppercase'>{genre.name}</p>
+                                    )
+                                })}
+                            </div>
+                            <p className='my-6 text-white'>{itemData.overview}</p>
+                        </div>
                     </div>
-                </div>
-                <div className="h-screen">
-                    <h1>Body</h1>
                 </div>
             </>
 
