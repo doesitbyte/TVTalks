@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import Link from "next/link"
+import MoviesCarousel from '../components/MoviesCarousel'
 
 
 export default function Movies() {
@@ -13,15 +12,7 @@ export default function Movies() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>TVTALKS MOVIES</h1>
-        <div>
-          <Link href="/">
-            HOME
-          </Link>
-          <Link href="/about">
-            ABOUT
-          </Link>
-        </div>
+        <MoviesCarousel/>
       </main>
     </>
   )

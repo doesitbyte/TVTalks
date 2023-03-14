@@ -15,7 +15,6 @@ export default function Movie() {
 
     useEffect(() => {
         if (!id) {
-            console.log("No id");
             return;
         }
 
@@ -47,11 +46,11 @@ export default function Movie() {
                 </Head>
                 <div className='relative'>
                     <div className="fixed top-0 left-0 right-0 h-screen z-0">
-                        <Image src={"https://image.tmdb.org/t/p/original" + itemData.backdrop_path} fill className="relative object-cover opacity-10 -z-0" alt={itemData.title} />
+                        <Image src={"https://image.tmdb.org/t/p/original" + itemData.backdrop_path} priority={true} fill className="relative object-cover opacity-10 -z-0" alt={itemData.title} />
                     </div>
                     <div id="header" className='px-12 py-12 h-fit flex'>
                         <div id="poster" className='basis-1/3 relative h-full w-full max-h-5/6 aspect-[2/3]'>
-                            <Image src={"https://image.tmdb.org/t/p/original" + itemData.poster_path} alt={itemData.title} fill object-fit="contain" className="relative pb-12 px-4" />
+                            <Image src={"https://image.tmdb.org/t/p/w500" + itemData.poster_path} alt={itemData.title} priority={true} fill object-fit="contain" className="relative pb-12 px-4" />
                         </div>
                         <div className='basis-2/3 headerText z-10'>
                             <h1 className='text-5xl font-extrabold text-white'>{itemData.title}</h1>
